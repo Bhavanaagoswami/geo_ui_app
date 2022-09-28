@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import EarthQuackForm from "./EarthquackForm";
+import axios from 'axios';
+import EarthquakeForm from "./EarthquakeForm";
+import {   Route, Routes,Link ,useParams } from "react-router-dom";
   
 // Edit Component
-const EditEarthquackData = (props) => {
+const EditEarthquakeData = (props) => {
+  let { ogc_fid } = useParams();
+  console.log(props);
   const [formValues, setFormValues] = useState({
     type: "", date: "", time:"", magnitude: "", logitude:"", latitude:"",
     depth:"",
@@ -22,54 +25,50 @@ const EditEarthquackData = (props) => {
   });
     
   //onSubmit handler
-  const onSubmit = (dataObject) => {
+  const onSubmit = dataObject => {
+    console.log("dataobject ",dataObject);
     axios
-      .put(
-        "http://localhost:8080/updateEarthquake/" +
+      .patch(
+        'http://localhost:8080/updateEarthquake/1',
           dataObject
       )
       .then((res) => {
         if (res.status === 200) {
-          alert("Earthquack Data successfully updated");
-          props.history.push("/EarthquackList");
+          alert("Earthquake Data successfully updated");
+          props.history.push("/EarthquakeList");
         } else Promise.reject();
       })
       .catch((err) => alert("Something went wrong"));
   };
   
-  // Load data from server and reinitialize Earthquack form
+  // Load data from server and reinitialize Earthquake form
   useEffect(() => {
     axios
-      .get(
-        "http://localhost:8080/updateEarthquack/" 
-        + props.match.params.id
+    .get(
+        'http://localhost:8080/getEarthquakeData/1'
       )
       .then((res) => {
-        const { date, time, logitude, latitude, type,
-            depth,
+        const { date, logitude, latitude, 
+                      depth,
             depth_seismic_stations,
             magnitude,
             magnitude_type,
-            magnitude_error,
             magnitude_seismic_stations,
             azimuthal_gap,
             horizontal_distance,
-            horizontal_error,
             root_mean_square,
             source,
             location_source,
             magnitude_source,
             status } = res.data;
-        setFormValues({ date, time, logitude, latitude, type,
+        setFormValues({ date, logitude, latitude,
             depth,
             depth_seismic_stations,
             magnitude,
             magnitude_type,
-            magnitude_error,
             magnitude_seismic_stations,
             azimuthal_gap,
             horizontal_distance,
-            horizontal_error,
             root_mean_square,
             source,
             location_source,
@@ -79,17 +78,17 @@ const EditEarthquackData = (props) => {
       .catch((err) => console.log(err));
   }, []);
   
-  // Return Earthquack form
+  // Return Earthquake form
   return (
-    <EarthQuackForm
+    <EarthquakeForm
       initialValues={formValues}
       onSubmit={onSubmit}
       enableReinitialize
     >
-      Update Earthquack
-    </EarthQuackForm>
+      Update Earthquake
+    </EarthquakeForm>
   );
 };
   
-// Export Earthquack Component
-export default EditEarthquackData;
+// Export Earthquake Component
+export default EditEarthquakeData;

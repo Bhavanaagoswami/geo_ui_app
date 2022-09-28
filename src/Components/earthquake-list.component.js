@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Table } from "react-bootstrap";
-import EarthquackDataTableRow from "./EarthquackTableRow";
+import EarthquakeDataTableRow from "./EarthquakeTableRow";
 import MapComponent from "./maps/map.component";
+
   
-const EarthquackDataList = () => {
-  const [earthquacks, setEarthquacks] = useState([]);
+const EarthquakeDataList = () => {
+  const [Earthquakes, setEarthquakes] = useState([]);
   
   useEffect(() => {
     axios
-      .get("http://localhost:8080/getEarthquackDataPerYear/1965")
+      .get("http://localhost:8080/getEarthquakeDataPerYear/1965")
       .then(({ data }) => {
-        setEarthquacks(data.earthquackDataList);
-        console.log(""+data.earthquackDataList);
+        setEarthquakes(data.earthquakeDataList);
+        console.log(data.earthquakeDataList);
       })
       .catch((error) => {
         console.log(error);
@@ -20,8 +21,9 @@ const EarthquackDataList = () => {
   }, []);
   
   const DataTable = () => {
-    return earthquacks.map((res, i) => {
-      return <EarthquackDataTableRow obj={res} key={i} />;
+    return Earthquakes.map((res, i) => {
+
+      return <EarthquakeDataTableRow obj={res} key={i} />;
     });
   };
 
@@ -34,11 +36,11 @@ const EarthquackDataList = () => {
   return (
     <div className="table-wrapper">
 
-    <MapComponent list={earthquacks}></MapComponent>
+    <MapComponent list={Earthquakes}></MapComponent>
       <Table striped bordered hover size="sm">
         <thead>
           <tr>
-            <td>ogc_fid</td>
+            <td>date</td>
             <td>magnitude</td>
             <td>latitude</td>
             <td>longitude</td>
@@ -50,4 +52,4 @@ const EarthquackDataList = () => {
   );
 };
   
-export default EarthquackDataList;
+export default EarthquakeDataList;

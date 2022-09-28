@@ -1,10 +1,13 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import {   Route, Routes,Link ,useParams } from "react-router-dom";
 import axios from "axios";
+import Earthquake from 
+    "./earthquake.component"
   
-const EarthquackDataTableRow = (props) => {
-  const { oid_fid,date, time, longitude, latitude, type,
+const EarthquakeDataTableRow = (props) => {
+
+  const { ogc_fid, date, time, longitude, latitude, type,
     depth,
     depth_seismic_stations,
     magnitude,
@@ -23,7 +26,7 @@ const EarthquackDataTableRow = (props) => {
   const deleteStudent = () => {
     axios
       .delete(
-"http://localhost:8080/students/delete-student/" + oid_fid)
+"http://localhost:8080/students/delete-student/" + ogc_fid)
       .then((res) => {
         if (res.status === 200) {
           alert("Student successfully deleted");
@@ -35,22 +38,32 @@ const EarthquackDataTableRow = (props) => {
   
   return (
     <tr>
-      <td>{oid_fid}</td>
+      <td>{date}</td>
       <td>{magnitude}</td>
       <td>{latitude}</td>
       <td>{longitude}</td>
+      <td>{ogc_fid}</td>
       <td>
+    
+        <Routes>
+      
+        <Route path="/earthquake/:ogc_fid" component={<Earthquake />} />
+        </Routes>
         <Link className="edit-link" 
-          to={"/edit-earthquackdata/" + oid_fid}>
+          to={{pathname: "/EditEarthquakeData/"+ ogc_fid}}>
           Edit
         </Link>
         <Button onClick={deleteStudent} 
           size="sm" variant="danger">
           Delete
         </Button>
+        {/* <Link className="edit-link" 
+          to='/Earthquake/'>
+          View
+        </Link> */}
       </td>
     </tr>
   );
 };
   
-export default EarthquackDataTableRow;
+export default EarthquakeDataTableRow;

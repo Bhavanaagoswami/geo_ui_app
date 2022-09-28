@@ -14,12 +14,14 @@ import { BrowserRouter as Router,
     Route, Routes,Link } from "react-router-dom";
   
 // Import other React Component
-import CreateEarthquackData from 
-    "./Components/create-earthquackdata.component";
-import EditEarthquackData from 
-    "./Components/edit-earthquackdata.component";
-import EarthquackDataList from 
-    "./Components/earthquack-list.component";
+import CreateEarthquakeData from 
+    "./Components/create-earthquakedata.component";
+import EditEarthquakeData from 
+    "./Components/edit-earthquakedata.component";
+import EarthquakeDataList from 
+    "./Components/earthquake-list.component";
+    import Earthquake from 
+    "./Components/earthquake.component";
   
 // App Component
 const App = () => {
@@ -30,24 +32,24 @@ const App = () => {
           <Navbar bg="dark" variant="dark">
             <Container>
               <Navbar.Brand>
-                <Link to={"/CreateEarthquackData"} 
+                <Link to={"/CreateEarthquakeData"} 
                   className="nav-link">
-                  React MERN Stack App
+                  Earthquake Details 
                 </Link>
               </Navbar.Brand>
   
               <Nav className="justify-content-end">
                 <Nav>
-                  <Link to={"/CreateEarthquackData"} 
+                  <Link to={"/CreateEarthquakeData"} 
                     className="nav-link">
-                    Add Earthquack Data
+                    Add Earthquake Data
                   </Link>
                 </Nav>
   
                 <Nav>
-                  <Link to={"/EarthquackDataList"} 
+                  <Link to={"/EarthquakeDataList"} 
                     className="nav-link">
-                    Earthquack Data List
+                    Earthquake Data List
                   </Link>
                 </Nav>
               </Nav>
@@ -61,12 +63,12 @@ const App = () => {
               <div className="wrapper">
             
             <Routes>
-                  <Route path="/CreateEarthquackData" 
-                    element={<CreateEarthquackData/>} />
-                  <Route path="/EditEarthquackData/:id" 
-                    element={<EditEarthquackData/>} />
-                  <Route path="/EarthquackDataList" 
-                    element={<EarthquackDataList/>} />
+                  <Route path="/CreateEarthquakeData" 
+                    element={<CreateEarthquakeData/>} />
+                  <Route path="/EditEarthquakeData/:id" 
+                    element={<EditEarthquakeData/>} />
+                  <Route path="/EarthquakeDataList" 
+                    element={<EarthquakeDataList/>} />
             </Routes>
             
               </div>

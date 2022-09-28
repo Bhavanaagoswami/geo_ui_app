@@ -2,10 +2,10 @@
 // Import Modules
 import React, { useState } from "react";
 import axios from 'axios';
-import EarthQuackForm from "./EarthquackForm";
+import EarthquakeForm from "./EarthquakeForm";
   
-// Add Earthquack Data Component
-const CreateEarthquackData = () => {
+// Add Earthquake Data Component
+const CreateEarthquakeData = () => {
   const [formValues, setFormValues] = 
     useState({ type: '', date: '', time:'', magnitude: '', logitude:'', latitude:'',
     depth:'',
@@ -35,15 +35,15 @@ dataObject)
       .catch(err => alert('Something went wrong'))
   }
     
-  // Return EarthQuackForm 
+  // Return EarthquakeForm 
   return(
-    <EarthQuackForm initialValues={formValues} 
+    <EarthquakeForm initialValues={formValues} 
       onSubmit={onSubmit} 
       enableReinitialize>
-      Add Earthquack Data
-    </EarthQuackForm>
+      Add Earthquake Data
+    </EarthquakeForm>
   )
 }
   
-// Export AddEarthquackData Component
-export default CreateEarthquackData
+// Export AddEarthquakeData Component
+export default CreateEarthquakeData
