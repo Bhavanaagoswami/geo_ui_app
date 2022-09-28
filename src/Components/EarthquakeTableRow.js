@@ -2,8 +2,7 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import {   Route, Routes,Link ,useParams } from "react-router-dom";
 import axios from "axios";
-import Earthquake from 
-    "./earthquake.component"
+
   
 const EarthquakeDataTableRow = (props) => {
 
@@ -45,10 +44,9 @@ const EarthquakeDataTableRow = (props) => {
       <td>{ogc_fid}</td>
       <td>
     
-        <Routes>
       
-        <Route path="/earthquake/:ogc_fid" component={<Earthquake />} />
-        </Routes>
+      
+       
         <Link className="edit-link" 
           to={{pathname: "/EditEarthquakeData/"+ ogc_fid}}>
           Edit
